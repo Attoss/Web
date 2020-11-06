@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="oma_tyyli.css">
+    <title>CSS perusteet!</title>
+    <style>
+
+        h1 {
+            color:blue;
+
+        }
+
+        header p {
+            border: 1em;
+            border-color: red;
+            color:forestgreen;
+        }
+
+        p {
+            color:gold;
+        }
+
+        #kappale {
+            background-color: brown;
+        }
+
+        .flex-container {
+            border: 2px red solid;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            height: 200px;
+            align-items: center;
+        }
+        
+        .flex-item {
+            border: 2px red solid;
+        }
+    </style>
+  
+
+  </head>
+  <body>
+    <h1>Tervetuloa sivustolle</h1>
+    <p>Alla hieman kuvausta <span style="color:green;">ERITTÄIN</span> hienosta dokumentista</p>
+
+    <p style="color:fuchsia;">Kohta räsähtää</p>
+    <header>
+        <p>Seuraavaksi kokeillaan lisää tyylejä</p>
+        <p id="kappale">Ja lisää on tulossa</p>
+    </header>
+
+    <article>
+        <p>Artikkeli 1</p>
+    </article>
+
+    <article>
+        <p>Artikkeli 2</p>
+    </article>
+    
+    <div class="flex-container">
+        <div class="flex-item" style="flex-grow: 1"><p>Lorem ipsum ja niin edelleen ja jottain muuta pitäisi keksiä mutta kun ei kuula sipellä</p></div>
+        <div class="flex-item" style="flex-grow: 2"><p>Lorem ipsum </p></div>
+        <div class="flex-item" style="flex-grow: 1"><p>Lorem ipsum ja niin edelleen ja jottain muuta pitäisi keksiä mutta kun ei kuula sipellä</p></div>
+    </div> 
+  </body>
+</html>
