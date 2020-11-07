@@ -56,7 +56,7 @@ module.exports =
   },
 
   update: function (req, res) {
-    connection.query('SELECT * FROM ASIAKAS WHERE 1=1', function (error, results, fields) {
+    connection.query('SELECT * FROM ASIAKAS WHERE Avain=${key}', function (error, results, fields) {
      
       if (error) {
         console.log("Virhe" + error);
