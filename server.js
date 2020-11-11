@@ -18,11 +18,12 @@ const port = process.env.PORT || 3002;
 
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    // Jos haluttaisiin rajata hakuja joidenkin ehtojen perusteella, niin määritettäisiin näin: 
+    res.header('Access-Control-Allow-Origin', '*'); //Allow all
 
-   // res.header('Access-Control-Allow-Methods','GET, PUT, POST, DELETE');
-   // res.header('Access-Control-Allow-Methods','Content-Type');
+    // Jos haluttaisiin avata hakuja joidenkin ehtojen perusteella, niin määritettäisiin näin: 
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers' , 'Content-Type');
+
     next();
 }
 // Otetaan käyttöön CORS säännöt:
@@ -40,21 +41,14 @@ app.route('/Types') // route reitittää pyynnön merkkijonon ja metodin peruste
     .get(customerController.fetchTypes);
 
 
-app.route('/Asiakas')
-    .get(customerController.fetchAll)
+app.route('/Customer')
+    .get(customerController.fetchCustomers)
     .post(customerController.create);
 
-app.route('/Asiakas/:id')
+app.route('/Customer/:id')
     .put(customerController.update)
-    .delete(customerController.delete);
+    .delete(customerController.delete); // esim. http://127.0.0.1:3002/Asiakas/122
 //
-
-app.get('/', function(request, response){
-    response.statusCode = 200;
-    response.setHeader('Content-Type', 'text/html');
-    response.end("Terve maailma"); 
-});
-
 
 app.listen(port, hostname, () => {
   console.log(`Server running AT http://${hostname}:${port}/`);

@@ -6,74 +6,90 @@
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-  host: 'localhost',
-  port: 3307,
-  user: 'root',
-  password: 'root',
-  database: 'asiakas',
-
+host : 'localhost', // tietokantapalvelimen osoite
+port : 3307 , //mysql oletus
+user : 'root', //testauskäyttäjänimi
+password : 'root', // voi olla joskus tyhjä
+database : 'asiakas' // asiakas db
 });
 
-module.exports =
+module.exports = 
 {
-  fetchTypes: function (req, res) {
-    connection.query('SELECT Avain, Lyhenne, Selite FROM Asiakastyyppi', function (error, results, fields) {
-      if (error) {
-        console.log("Virhe" + error);
-        res.status(500);
-        res.json({ "status": "ei toiminut" })
-
-      }
-      else {
-        console.log("Data =" + JSON.stringify(results));
+    fetchTypes: function (req, res) {  
+      connection.query('SELECT Avain, Lyhenne, Selite FROM Asiakastyyppi', function(error, results, fields){
+        if ( error ){
+          console.log("Virhe haettaessa dataa asiakas taulusta: " + error);
+          res.status(500);
+          res.json({"status" : "ei toiminut"});
+        }
+        else
+        {
+        console.log("Data = " + JSON.stringify(results));
         res.json(results);
-      }
+        }
     });
 
-  },
+    },
 
-  fetchAll: function (req, res) {
-    connection.query('SELECT * FROM asiakas', function (error, results, fields) {
-     
-      if (error) {
-        console.log("Virhe" + error);
-        res.status(500);
-        res.json({ "status": "ei toiminut" })
-
-      }
-      else {
-        console.log("Data =" + JSON.stringify(results));
+    /*fetchAll: function(req, res){
+        connection.query('SELECT avain, nimi, osoite, postinro, luontipvm, asty_avain FROM asiakas', function(error, results, fields){
+      
+        if ( error ){
+          console.log("Virhe haettaessa dataa asiakas taulusta: " + error);
+          res.status(500);
+          res.json({"status" : "ei toiminut"});
+        }
+        else
+        {
+        console.log("Data = " + JSON.stringify(results));
         res.json(results);
+        }
+        //console.log("Body= " +JSON.stringify(req.body));
+        //console.log("Params = " + JSON.stringify(req.query));
+        //console.log(req.query.nimi);
+        //res.send("Kutsuttiin fetchAll");
+      });
+    },*/
+
+    fetchCustomers: function(req, res){
+      console.log(req.query.asty_avain);
+      var sql = 'SELECT avain, nimi, osoite, postinro, postitmp, luontipvm, asty_avain FROM asiakas WHERE 1 = 1';
+      if(req.query.nimi != null)
+      sql = sql + " and nimi like '" + req.query.nimi + "%'";
+      if(req.query.osoite != null)
+      sql = sql + " and osoite like '" + req.query.osoite + "%'";
+      if(req.query.asty_avain != null && req.query.asty_avain != "")
+      sql += " and asty_avain like '" + req.query.asty_avain;
+
+      connection.query(sql, function(error, results, fields){
+      
+      if ( error ){
+        console.log("Virhe haettaessa dataa asiakas taulusta: " + error);
+        res.status(500);
+        res.json({"status" : "ei toiminut"});
       }
+      else
+      {
+      console.log("Data = " + JSON.stringify(results));
+      res.json(results);
+      }
+
     });
   },
 
-  create: function (req, res) {
+    create: function(req, res){
+      console.log("Data= " + JSON.stringify(req.body));
+      console.log(req.body.nimi);
+      res.send("Kutsuttiin create");
+    },
 
-    console.log("Data =" + JSON.stringify(req.body));
-    console.log(req.query.nimi);
-    res.send("Kutsuttiin create");
-  },
+    update: function(req, res){
 
-  update: function (req, res) {
-    connection.query('SELECT * FROM ASIAKAS WHERE Avain=${key}', function (error, results, fields) {
-     
-      if (error) {
-        console.log("Virhe" + error);
-        res.status(500);
-        res.json({ "status": "ei toiminut" })
+    },
 
-      }
-      else {
-        console.log("Data =" + JSON.stringify(results));
-        res.json(results);
-      }
-    });
-  },
-
-  delete: function (req, res) {
-    console.log("Body =" + JSON.stringify(req.body));
-    console.log("Params =" + JSON.stringify(req.params));
-    res.send("Kutsuttiin delete");
-  }
+    delete : function (req, res) {
+      console.log("Body = " + JSON.stringify(req.body));
+      console.log("Params= " + JSON.stringify(req.params));
+      res.send("Kutsuttiin delete");
+    }
 }
