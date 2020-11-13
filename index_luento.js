@@ -21,8 +21,7 @@ http.createServer(function(request, response){
     console.log("headers : " + JSON.stringify(headers) + ", url:" + url + ", method:" + method);
 
     response.writeHead(200, {'Content-Type' : 'text/plain'});
-    response.end("Hello World!");
-    */
+    response.end("Hello World!");*/
 }).listen(3002);
 
 console.log("Server running at http://localhost:3002");

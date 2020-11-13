@@ -63,7 +63,7 @@ $().ready (() => {
 
     // tekee post-kutsun palvelimelle ja vastauksen saatuaan jatkaa
     addCust = (param) => {
-        $.post("http://127.0.0.1:3002/customer?${sp}", param)
+        $.post("http://127.0.0.1:3002/Customer", param)
             .then((data) => {
                 showAddCustStat(data);
                 $('#addCustDialog').dialog("close");
@@ -165,23 +165,11 @@ deleteCustomer = (key) => {
     if (isNaN(key)) {
         return;
     }
-    $().ready(() => {
-        $("#poista").click(() => {
-            $.ajax({
-                url: 'http://localhost:3002/Customer/${avain}', // poistettavan asiakkaan avain tässä 112
-                type: 'DELETE',
-                contentType: 'application/json',
-                //data: JSON.stringify(data), // Tähän voi laittaa datan javascriptin objektina kun tehdään put kysely
-                success: function (result) {
-                    // Päivitetään tässä yhteydessä tiedot tauluun
-                    console.log(result);
-                },
-                error: function (ajaxContext) {
-                    // Jos joku meni pieleen, niin ajetaan tässä koodia. Vaikka sitten päivitetään jotain käyttöliittymällä
-                    alert(ajaxContext.responseText)
-                }
-            });
-        })
+    $.get({
+        url: `http://localhost:3002/Customer/avain=${key}`,
+        success: (result) => {
+            fetch();
+        }
     });
 }
 

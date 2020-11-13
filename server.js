@@ -42,12 +42,12 @@ app.route('/Types') // route reitittää pyynnön merkkijonon ja metodin peruste
 
 
 app.route('/Customer')
-    .get(customerController.fetchCustomers) // 
-    .post(customerController.create); /// TÄSSÄ ON SE LISÄYS SINNE MYSQL // CREATE POST VIITTAA CREATEEN
+    .get(customerController.fetchCustomers)
+    .post(customerController.create);
 
 app.route('/Customer/:id')
     .put(customerController.update)
-    .delete(customerController.delete); // esim. http://127.0.0.1:3002/Asiakas/122
+    .delete(customerController.delete); // esim. http://127.0.0.1:3002/Customer/122
 //
 
 app.listen(port, hostname, () => {

@@ -7,9 +7,9 @@ var mysql = require('mysql');
 
 var connection = mysql.createConnection({
 host : 'localhost', // tietokantapalvelimen osoite
-port : 3307 , //mysql oletus
+port : 3306 , //mysql oletus
 user : 'root', //testauskäyttäjänimi
-password : 'root', // voi olla joskus tyhjä
+password : 'rootti', // voi olla joskus tyhjä
 database : 'asiakas' // asiakas db
 });
 
@@ -78,9 +78,11 @@ module.exports =
   },
 
     create: function(req, res){
-      console.log(req.query.asty_avain);
-      var sql = "'INSERT INTO asiakas (nimi, osoite, postinro, postitmp, luontipvm, asty_avain) VALUES ("+"'"+req.query.nimi+"','" +req.query.osoite+"','"+req.query.postinro+"','"+req.query.postitmp+"','"+req.query.luontipvm+"','"+req.query.asty_avain+"')";
-      res.send("Kutsuttiin create");
+      
+      var sql = "'INSERT INTO asiakas (nimi, osoite, postinro, postitmp, luontipvm, asty_avain) VALUES ("+"'"+req.query.nimi+"','" +req.query.osoite+"','"+req.query.postinro+"','"+req.query.postitmp+"','"+"curdate()"+"','"+req.query.asty_avain+"')";
+
+      connection.query(sql, function(error, results, fields){
+      
       if ( error ){
         console.log("Virhe haettaessa dataa asiakas taulusta: " + error);
         res.status(500);
@@ -91,13 +93,19 @@ module.exports =
       console.log("Data = " + JSON.stringify(results));
       res.json(results);
       }
+
+    });
+      console.log("Data= " + JSON.stringify(req.body));
+      console.log(req.body.nimi);
+      res.send("Kutsuttiin create");
     },
 
     update: function(req, res){
 
     },
 
-    delete : function (req, res) {
+    delete : function (req, res) {    
+
       var sql = "DELETE FROM asiakas WHERE avain=" + JSON.stringify(req.params.id);
       
       connection.query(sql, function(error, results, fields){
@@ -114,8 +122,8 @@ module.exports =
         }
   
       });
-      console.log("Body = " + JSON.stringify(req.body));
+      /*console.log("Body = " + JSON.stringify(req.body));
       console.log("Params= " + JSON.stringify(req.params));
-      res.send("Kutsuttiin delete");
+      res.send("Kutsuttiin delete");*/
     }
 }
