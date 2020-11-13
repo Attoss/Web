@@ -78,9 +78,19 @@ module.exports =
   },
 
     create: function(req, res){
-      console.log("Data= " + JSON.stringify(req.body));
-      console.log(req.body.nimi);
+      console.log(req.query.asty_avain);
+      var sql = "'INSERT INTO asiakas (nimi, osoite, postinro, postitmp, luontipvm, asty_avain) VALUES ("+"'"+req.query.nimi+"','" +req.query.osoite+"','"+req.query.postinro+"','"+req.query.postitmp+"','"+req.query.luontipvm+"','"+req.query.asty_avain+"')";
       res.send("Kutsuttiin create");
+      if ( error ){
+        console.log("Virhe haettaessa dataa asiakas taulusta: " + error);
+        res.status(500);
+        res.json({"status" : "ei toiminut"});
+      }
+      else
+      {
+      console.log("Data = " + JSON.stringify(results));
+      res.json(results);
+      }
     },
 
     update: function(req, res){
@@ -88,6 +98,22 @@ module.exports =
     },
 
     delete : function (req, res) {
+      var sql = "DELETE FROM asiakas WHERE avain=" + JSON.stringify(req.params.id);
+      
+      connection.query(sql, function(error, results, fields){
+      
+        if ( error ){
+          console.log("Virhe haettaessa dataa asiakas taulusta: " + error);
+          res.status(500);
+          res.json({"status" : "ei toiminut"});
+        }
+        else
+        {
+        console.log("Data = " + JSON.stringify(results));
+        res.json(results);
+        }
+  
+      });
       console.log("Body = " + JSON.stringify(req.body));
       console.log("Params= " + JSON.stringify(req.params));
       res.send("Kutsuttiin delete");

@@ -42,8 +42,8 @@ app.route('/Types') // route reitittää pyynnön merkkijonon ja metodin peruste
 
 
 app.route('/Customer')
-    .get(customerController.fetchCustomers)
-    .post(customerController.create);
+    .get(customerController.fetchCustomers) // 
+    .post(customerController.create); /// TÄSSÄ ON SE LISÄYS SINNE MYSQL // CREATE POST VIITTAA CREATEEN
 
 app.route('/Customer/:id')
     .put(customerController.update)

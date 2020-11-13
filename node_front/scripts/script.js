@@ -63,7 +63,7 @@ $().ready (() => {
 
     // tekee post-kutsun palvelimelle ja vastauksen saatuaan jatkaa
     addCust = (param) => {
-        $.post("https://codez.savonia.fi/jussi/api/asiakas/lisaa.php", param)
+        $.post("http://127.0.0.1:3002/customer?${sp}", param)
             .then((data) => {
                 showAddCustStat(data);
                 $('#addCustDialog').dialog("close");
@@ -165,11 +165,23 @@ deleteCustomer = (key) => {
     if (isNaN(key)) {
         return;
     }
-    $.get({
-        url: `https://codez.savonia.fi/jussi/api/asiakas/poista.php?avain=${key}`,
-        success: (result) => {
-            fetch();
-        }
+    $().ready(() => {
+        $("#poista").click(() => {
+            $.ajax({
+                url: 'http://localhost:3002/Customer/${avain}', // poistettavan asiakkaan avain tässä 112
+                type: 'DELETE',
+                contentType: 'application/json',
+                //data: JSON.stringify(data), // Tähän voi laittaa datan javascriptin objektina kun tehdään put kysely
+                success: function (result) {
+                    // Päivitetään tässä yhteydessä tiedot tauluun
+                    console.log(result);
+                },
+                error: function (ajaxContext) {
+                    // Jos joku meni pieleen, niin ajetaan tässä koodia. Vaikka sitten päivitetään jotain käyttöliittymällä
+                    alert(ajaxContext.responseText)
+                }
+            });
+        })
     });
 }
 
