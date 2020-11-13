@@ -59,7 +59,7 @@ module.exports =
       if(req.query.osoite != null)
       sql = sql + " and osoite like '" + req.query.osoite + "%'";
       if(req.query.asty_avain != null && req.query.asty_avain != "")
-      sql += " and asty_avain like '" + req.query.asty_avain;
+      sql += " and asty_avain like " + req.query.asty_avain;
 
       connection.query(sql, function(error, results, fields){
       

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $().ready(() => {
+            $("#poista").click(() => {
+                $.ajax({
+                    url: 'http://localhost:3002/Customer/7', // poistettavan asiakkaan avain tässä 112
+                    type: 'DELETE',
+                    contentType: 'application/json',
+					//data: JSON.stringify(data), // Tähän voi laittaa datan javascriptin objektina kun tehdään put kysely
+                    success: function (result) {
+                        // Päivitetään tässä yhteydessä tiedot tauluun
+                        console.log(result);
+                    },
+					error: function (ajaxContext) {
+						// Jos joku meni pieleen, niin ajetaan tässä koodia. Vaikka sitten päivitetään jotain käyttöliittymällä
+						alert(ajaxContext.responseText)
+					}
+                });
+            })
+        });
+    </script>
+    <title>Ajax delete testi</title>
+</head>
+
+<body>
+    <h1>Testataan deleteä</h1>
+    <button id="poista">POISTA</button>
+</body>
+
+</html>
