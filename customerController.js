@@ -7,9 +7,9 @@ var mysql = require('mysql');
 
 var connection = mysql.createConnection({
 host : 'localhost', // tietokantapalvelimen osoite
-port : 3306 , //mysql oletus
+port : 3307 , //mysql oletus
 user : 'root', //testauskäyttäjänimi
-password : 'rootti', // voi olla joskus tyhjä
+password : 'root', // voi olla joskus tyhjä
 database : 'asiakas' // asiakas db
 });
 
