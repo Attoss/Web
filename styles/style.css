@@ -1,0 +1,68 @@
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+
+input[type="text"], select, option {
+    border: black solid 1px;
+}
+
+table {
+    border: black solid 1px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem .5rem;
+    border: black solid 1px;
+}
+
+fieldset {
+    margin: 0;
+    margin-bottom: 2rem;
+}
+
+.searchGrid {
+    display: grid;
+    grid-template-areas: '. .'
+    '. .'
+    '. .';
+    grid-template-columns: 125px 300px;
+    gap: .5rem;
+}
+
+.searchFields, .dataTable, .addStatusDiv {
+    min-width: 820px;
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.data {
+    width: 100%;
+}
+
+.searchBtn, .deleteBtn {
+    border: black solid 1px;
+    padding: 1rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.searchBtn {
+    margin-top: 1rem;
+}
+
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    gap: .5rem;
+}
+
+.warning {
+    display: none;
+    font-size: 12px;
+    color: red;
+}

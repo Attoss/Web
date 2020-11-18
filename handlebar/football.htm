@@ -1,0 +1,73 @@
+<!doctype html>
+<title>Example</title>
+<style>
+body { 
+  display: grid;
+  grid-template-areas: 
+    "header header header"
+    "nav article ads"
+    "footer footer footer";
+  grid-template-rows: 60px 1fr 100px;
+  grid-template-columns: 15% 1fr 25%;
+  grid-gap: 10px;
+  margin: 0;
+  }
+header, footer, article, aside, div {
+  padding: 10px;
+  background: gold;
+}
+#pageHeader {
+  grid-area: header;
+}
+#pageFooter {
+  grid-area: footer;
+}
+#mainArticle { 
+  grid-area: article;      
+  }
+#mainNav { 
+  grid-area: nav; 
+  }
+#siteAds { 
+  grid-area: ads; 
+  }
+</style>
+<body>
+  <header id="pageHeader">
+    <table style="margin-left: auto;"> 
+      <tr>
+        <td>
+            Tervetuloa Jalkapallo-sivulle
+        </td>
+        <td>
+            <select>
+                <option>Valitse toiminto</option>
+              </select>        
+        </td>
+      </tr> 
+    </table>
+  </header>
+  <article id="mainArticle">
+      <p>Valitse vasemmalta listalta jotain</p>
+  </article>
+  <aside id="mainNav">
+    <ul style="list-style: none;">
+        <li><a href="">Sarjataulukko</a></li>
+        <li><a href="">Pelaajat ja joukkueet</a></li>
+    </ul>
+  </aside>
+  <div id="siteAds">
+    <p>Seuraava tapahtumat</p>
+    <ul style="list-style: none;">
+        <li>28.10.2018 Suomi-Unkari miesten maaottelu</li>
+        <li>01.11.2018 Futsal turnaus Kuopiossa</li>
+        <li>12.11.2018 Kauden päättäjäiset Keskuskentällä</li>
+        <li>28.11.2018 Pikkujoulut</li>
+    </ul>
+  </div>
+  <footer id="pageFooter">
+    <div style="text-align: center">
+        <p>Yhteystiedot</p>
+    </div>
+  </footer>
+</body>

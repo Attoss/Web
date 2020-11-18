@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tästä on hyvä aloittaa node.js tehtävät</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="./scripts/script.js"></script>
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+    <div class="searchFields" id="searchFields">
+        <fieldset>
+            <legend><h3>Haku</h3></legend>
+            <div class="searchGrid">
+                <label for="name">Nimi: </label>
+                <input type="text" name="name" id="name">
+                <label for="address">Osoite: </label>
+                <input type="text" name="address" id="address">
+                <label for="custType">Asiaskastyyppi: </label>
+                <select name="custType" class="custType" id="custType">
+                    <option value="empty" selected disabled>Valitse asiakastyyppi...</option>
+                </select>
+            </div>
+            <div>
+                <input type="button" value="Hae" id="searchBtn" class="searchBtn">
+                <input type="button" value="Lisää asiakas" id="addCustBtn" class="searchBtn">
+            </div>
+
+        </fieldset>
+    </div>
+
+    <div class="addStatusDiv">
+        <p id="addStatus" style="display: none;"></p>
+    </div>
+    
+    <div class="dataTable" id="dataTable">
+        <table class="data" id="data">
+            <thead>
+                <tr>
+                    <th>Nimi</th>
+                    <th>Osoite</th>
+                    <th>Postinumero</th>
+                    <th>Postitoimipaikka</th>
+                    <th>Luontipäivämäärä</th>
+                    <th>Asiakastyyppi</th>
+                    <th style="min-width: 100px; max-width: 125px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            </tbody>
+        </table>
+    </div>
+
+    <div class="addCustDialog" id="addCustDialog" title="Asiakkaan lisääminen">
+        <div class="addCustDiv" id="addCustDiv">
+            <form>
+                <fieldset style="margin-bottom: 1rem;">
+                    <legend>Asiakkaan tiedot</legend>
+                    <div class="gridContainer">
+                        <label for="custName">Nimi</label>
+                        <input type="text" name="nimi" id="custName">
+                        <label for="custAddress">Osoite</label>
+                        <input type="text" name="osoite" id="custAddress">
+                        <label for="custPostNbr">Postinumero</label>
+                        <input type="text" name="postinro" id="custPostNbr">
+                        <label for="custPostOff">Postitoimipaikka</label>
+                        <input type="text" name="postitmp" id="custPostOff">
+                        <label for="custType">Asiaskastyyppi: </label>
+                        <select name="asty_avain" class="custType" id="custCustType">
+                            <option value="empty" selected disabled>Valitse asiakastyyppi...</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <p id="warning" class="warning">Kaikki kentät ovat pakollisia!</p>
+                <input type="submit" value="Lisää" id="addCustSubmit">
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
