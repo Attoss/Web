@@ -11,7 +11,7 @@ port : 3307 , //mysql oletus
 user : 'root', //testauskäyttäjänimi
 password : 'root', // voi olla joskus tyhjä
 database : 'asiakas' // asiakas db
-}); // toimii läppärilä
+}); // toimii läppärilä xd
 
 module.exports = 
 {
