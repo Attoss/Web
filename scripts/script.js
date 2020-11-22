@@ -10,6 +10,8 @@ $().ready (() => {
             let optstr = `<option value="${r.Avain}">${r.Lyhenne + " " + r.Selite}</option>`;
             $('#custType').append(optstr);
             $('#custCustType').append(optstr);
+            $('#custType1').append(optstr);
+            $('#custCustType1').append(optstr);
         });
     }
     });
@@ -23,7 +25,9 @@ $().ready (() => {
                 showResultInTable(result, astys);
         }});
     }
-
+    $('#upCustSubmit').click(() => {
+        fetch();
+    });
     // bindataan click-event
     $('#searchBtn').click(() => {
         fetch();
@@ -49,6 +53,18 @@ $().ready (() => {
             allFields.removeClass("ui-state-error");
         }
     });
+    let dialog1 = $('#upCustDialog').dialog({
+        autoOpen: false,
+        modal: true,
+        resizable: false,
+        minWidth: 400,
+        width: 'auto',
+        close: function() {
+            form[0].reset();
+            allFields.removeClass("ui-state-error");
+        }
+    });
+    
 
     // luodaan formi
     let form = dialog.find("form")
@@ -60,6 +76,7 @@ $().ready (() => {
             }
         }
     );
+   
 
     // tekee post-kutsun palvelimelle ja vastauksen saatuaan jatkaa
     addCust = (param) => {
@@ -155,29 +172,43 @@ showResultInTable = (result, astys) => {
             }
         });
         trstr += `<td><button onclick="deleteCustomer(${element.avain});" class="deleteBtn">Poista</button></td>`;
+        trstr += `<td><button onclick="updateCustomer(${element.avain});" class="updateBtn">Päivitä</button></td>`;
         trstr += "</tr>\n";
         $('#data tbody').append(trstr);
     });
 }
 
 // poistetaan asiakas
-deleteCustomer = (key) => {
-    if (isNaN(key)) {
-        return;
-    }
-    $.get({
-        url: `http://localhost:3002/Customer/avain=${key}`,
-        success: (result) => {
+deleteCustomer = (key) => {    
+    $.ajax({
+        url: "http://localhost:3002/Customer/" + key,
+        type: 'DELETE',
+        success: () => {
             fetch();
-        }
-    });
+        } 
+    })
 }
 
-toTitleCase = (str) => {
-    return str.replace(
-        /\w\S*/g,
-        function(txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        }
-    );
+updateCustomer = (key) => {    
+    const isOpen = $('#upCustDialog').dialog("isOpen");
+    $.ajax({
+        url: "http://localhost:3002/Customer/" + key,
+        type: 'PUT',
+        success: () => {
+            fetch();
+        } 
+    })
+    if (!isOpen) {
+        $('#upCustDialog').dialog("open");
+    }
+   
 }
+fetchTypes= ()=>{
+    $.get({
+        url: `http://127.0.0.1:3002/customer?${sp}`,
+        success: (result) => {
+            showResultInTable(result, astys);
+    }});
+}
+
+

@@ -11,7 +11,7 @@ port : 3307 , //mysql oletus
 user : 'root', //testauskäyttäjänimi
 password : 'root', // voi olla joskus tyhjä
 database : 'asiakas' // asiakas db
-}); // toimii läppärilä xd
+}); 
 
 module.exports = 
 {
@@ -121,7 +121,6 @@ module.exports =
         console.log("Data = " + JSON.stringify(results));
         res.json(results);
         }
-  
       });
       /*console.log("Body = " + JSON.stringify(req.body));
       console.log("Params= " + JSON.stringify(req.params));

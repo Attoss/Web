@@ -81,6 +81,31 @@
             </form>
         </div>
     </div>
+    <div class="upCustDialog" id="upCustDialog" title="Asiakkaan Päivittäminen">
+        <div class="upCustDiv" id="upCustDiv">
+            <form>
+                <fieldset style="margin-bottom: 1rem;">
+                    <legend>Asiakkaan päivittäminen</legend>
+                    <div class="gridContainer">
+                        <label for="custName">Nimi</label>
+                        <input type="text" name="nimi" id="custName1">
+                        <label for="custAddress">Osoite</label>
+                        <input type="text" name="osoite" id="custAddress1">
+                        <label for="custPostNbr">Postinumero</label>
+                        <input type="text" name="postinro" id="custPostNbr1">
+                        <label for="custPostOff">Postitoimipaikka</label>
+                        <input type="text" name="postitmp" id="custPostOff1">
+                        <label for="custType1">Asiaskastyyppi: </label>
+                        <select name="asty_avain1" class="custType1" id="custCustType1">
+                            <option value="empty" selected disabled>Valitse asiakastyyppi...</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <p id="warning" class="warning">Kaikki kentät ovat pakollisia!</p>
+                <input type="submit" value="päivitä" id="upCustSubmit">
+            </form>
+        </div>
+    </div>
     
 </body>
 </html>
